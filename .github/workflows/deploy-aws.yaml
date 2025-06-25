@@ -36,9 +36,9 @@ jobs:
 
       - name: BuildAndPush Dockerfile
         run: |
-          docker build -t fiap-prod . && \
-          docker tag fiap-prod:latest ${{ env.AWS_ACCOUNT_ID }}.dkr.ecr.${{ env.AWS_REGION }}.amazonaws.com/fiap-prod:latest && \
-          docker push ${{ env.AWS_ACCOUNT_ID }}.dkr.ecr.${{ env.AWS_REGION }}.amazonaws.com/fiap-prod:latest
+          docker build -t fiap-payments-prod . && \
+          docker tag fiap-payments-prod:latest ${{ env.AWS_ACCOUNT_ID }}.dkr.ecr.${{ env.AWS_REGION }}.amazonaws.com/fiap-payments-prod:latest && \
+          docker push ${{ env.AWS_ACCOUNT_ID }}.dkr.ecr.${{ env.AWS_REGION }}.amazonaws.com/fiap-payments-prod:latest
 
       - name: Update Kube Config
         run: |
