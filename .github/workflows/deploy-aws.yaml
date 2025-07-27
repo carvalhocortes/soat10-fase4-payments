@@ -1,9 +1,10 @@
 name: Deploy AWS Production
 
 on:
-  push:
-    branches:
-      - main
+  workflow_run:
+    workflows: ["CI - Testes e Cobertura"]
+    types:
+      - completed
 
 env:
   AWS_REGION: us-west-2
@@ -27,7 +28,7 @@ jobs:
           aws-session-token: ${{ secrets.AWS_SESSION_TOKEN }}
           aws-region: ${{ env.AWS_REGION }}
 
-      - name: Login ECR
+/Users/fernandocortes/Documents/code/POSTECH_SOAT_ORDERS/.github/workflows/ci.yaml      - name: Login ECR
         run: |
           aws ecr get-login-password \
           --region ${{ env.AWS_REGION }} | \
