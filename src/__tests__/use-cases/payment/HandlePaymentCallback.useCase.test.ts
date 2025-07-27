@@ -1,6 +1,6 @@
 import { HandlePaymentCallbackUseCase } from '@application/use-cases/payment/HandlePaymentCallback.useCase';
 import { Payment } from '@core/entities/payment.entity';
-import { SnsPublisher } from '@infrastructure/external/payment/SnsPublisher';
+import { SnsPublisher } from '@infrastructure/external/snsPublisher';
 
 const mockPaymentRepository = {
   findByOrderId: jest.fn(),

@@ -2,7 +2,7 @@ import { HandlePaymentCallbackDTO } from '@application/dto/payment/HandlePayment
 import { PaymentRepository } from '@interfaces/gateways/PaymentRepository.gateway';
 import { Payment } from '@core/entities/payment.entity';
 import { NotFoundError } from '@shared/errors/NotFoundError';
-import { SnsPublisher } from '@infrastructure/external/payment/SnsPublisher';
+import { SnsPublisher } from '@infrastructure/external/snsPublisher';
 
 export class HandlePaymentCallbackUseCase {
   constructor(

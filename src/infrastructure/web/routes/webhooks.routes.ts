@@ -5,11 +5,13 @@ import { asyncHandler } from '@infrastructure/web/middlewares/asyncHandler.middl
 import { webhookSchemas } from '@interfaces/validations/webhook.validation';
 import { PaymentWebhookController } from '@interfaces/controllers/webhook.controller';
 import { HandlePaymentCallbackUseCase } from '@application/use-cases/payment/HandlePaymentCallback.useCase';
-import { SnsPublisher } from '@infrastructure/external/payment/SnsPublisher';
+import { SnsPublisher } from '@infrastructure/external/snsPublisher';
+
+const topicArn = process.env.SNS_TOPIC_ARN || '';
 
 const router = express.Router();
 const paymentRepository = new DynamoPaymentRepository();
-const snsPublisher = new SnsPublisher('');
+const snsPublisher = new SnsPublisher(topicArn);
 const whController = new PaymentWebhookController(new HandlePaymentCallbackUseCase(paymentRepository, snsPublisher));
 
 router.post(

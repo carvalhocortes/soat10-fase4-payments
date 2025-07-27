@@ -1,5 +1,5 @@
 import { ProcessPaymentOnOrderCreatedUseCase } from '@application/use-cases/payment/ProcessPaymentOnOrderCreated.useCase';
-import { SnsPublisher } from '@infrastructure/external/payment/SnsPublisher';
+import { SnsPublisher } from '@infrastructure/external/snsPublisher';
 import { Payment } from '@core/entities/payment.entity';
 
 const mockPaymentRepository = {

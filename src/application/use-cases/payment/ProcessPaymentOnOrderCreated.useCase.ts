@@ -1,6 +1,6 @@
 import { PaymentRepository } from '@interfaces/gateways/PaymentRepository.gateway';
 import { Payment } from '@core/entities/payment.entity';
-import { SnsPublisher } from '@infrastructure/external/payment/SnsPublisher';
+import { SnsPublisher } from '@infrastructure/external/snsPublisher';
 import { ProcessPaymentOnOrderCreatedDTO } from '@application/dto/payment/ProcessPaymentOnOrderCreatedDTO';
 
 export class ProcessPaymentOnOrderCreatedUseCase {
