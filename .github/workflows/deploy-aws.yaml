@@ -9,6 +9,8 @@ env:
   AWS_REGION: us-west-2
   CLUSTER_NAME: eks-fiap-soat10-prod
   AWS_ACCOUNT_ID: ${{ secrets.AWS_ACCOUNT_ID }}
+  AWS_ECR_NAME: fiap-prod
+  APP_IMAGE_NAME: fiap-payments-prod
 
 jobs:
   deploy-production:
@@ -36,9 +38,9 @@ jobs:
 
       - name: BuildAndPush Dockerfile
         run: |
-          docker build -t fiap-payments-prod . && \
-          docker tag fiap-payments-prod:latest ${{ env.AWS_ACCOUNT_ID }}.dkr.ecr.${{ env.AWS_REGION }}.amazonaws.com/fiap-payments-prod:latest && \
-          docker push ${{ env.AWS_ACCOUNT_ID }}.dkr.ecr.${{ env.AWS_REGION }}.amazonaws.com/fiap-payments-prod:latest
+          docker build -t ${{ env.APP_IMAGE_NAME }} . && \
+          docker tag ${{ env.APP_IMAGE_NAME }}:latest ${{ env.AWS_ACCOUNT_ID }}.dkr.ecr.${{ env.AWS_REGION }}.amazonaws.com/${{ env.AWS_ECR_NAME }}:latest && \
+          docker push ${{ env.AWS_ACCOUNT_ID }}.dkr.ecr.${{ env.AWS_REGION }}.amazonaws.com/${{ env.AWS_ECR_NAME }}:latest
 
       - name: Update Kube Config
         run: |
