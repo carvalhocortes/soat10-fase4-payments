@@ -8,7 +8,7 @@ on:
 env:
   AWS_REGION: us-west-2
   CLUSTER_NAME: eks-fiap-soat10-prod
-  AWS_ACCOUNT_ID: 578625597971
+  AWS_ACCOUNT_ID: ${{ secrets.AWS_ACCOUNT_ID }}
 
 jobs:
   deploy-production:
@@ -22,7 +22,7 @@ jobs:
         uses: aws-actions/configure-aws-credentials@v4
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-session-token: ${{ secrets.AWS_SESSION_TOKEN }}
           aws-region: ${{ env.AWS_REGION }}
 
