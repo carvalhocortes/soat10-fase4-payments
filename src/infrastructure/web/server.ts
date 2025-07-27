@@ -36,6 +36,7 @@ class Server {
       const sqsListener = createSqsListener(queueUrl, topicArn);
 
       const pollMessages = async () => {
+        console.log('Starting to listen for SQS messages...');
         while (true) {
           await sqsListener.listen();
         }
