@@ -28,7 +28,7 @@ jobs:
           aws-session-token: ${{ secrets.AWS_SESSION_TOKEN }}
           aws-region: ${{ env.AWS_REGION }}
 
-/Users/fernandocortes/Documents/code/POSTECH_SOAT_ORDERS/.github/workflows/ci.yaml      - name: Login ECR
+      - name: Login ECR
         run: |
           aws ecr get-login-password \
           --region ${{ env.AWS_REGION }} | \
