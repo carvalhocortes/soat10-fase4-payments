@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 
 import { UpdateOrderPaymentStatusUseCase } from '@application/use-cases/payment/UpdateOrderPaymentStatus.useCase';
-import { UpdateOrderPaymentStatusDTO } from '@application/dto/payment/UpdateOrderPayment.dto';
+import { UpdateOrderPaymentStatusDTO } from '@application/dto/payment/HandlePaymentCallbackDTO';
 
 export class PaymentWebhookController {
   constructor(private readonly updatePaymentUseCase: UpdateOrderPaymentStatusUseCase) {}

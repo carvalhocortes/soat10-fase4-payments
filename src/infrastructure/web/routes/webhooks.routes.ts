@@ -1,14 +1,18 @@
 import express from 'express';
-import { DynamoOrderRepository } from '@infrastructure/db/repositories/OrderRepository.db';
+import { DynamoPaymentRepository } from '@infrastructure/db/repositories/PaymentRepository.db';
 import { validateRequest } from '@infrastructure/web/middlewares/validateRequest.middleware';
 import { asyncHandler } from '@infrastructure/web/middlewares/asyncHandler.middleware';
 import { webhookSchemas } from '@interfaces/validations/webhook.validation';
 import { PaymentWebhookController } from '@interfaces/controllers/webhook.controller';
-import { UpdateOrderPaymentStatusUseCase } from '@application/use-cases/payment/UpdateOrderPaymentStatus.useCase';
+import { HandlePaymentCallbackUseCase } from '@application/use-cases/payment/HandlePaymentCallback.useCase';
+import { SnsPublisher } from '@infrastructure/external/snsPublisher';
+
+const topicArn = process.env.SNS_PAYMENT_TOPIC_ARN || '';
 
 const router = express.Router();
-const orderRepository = new DynamoOrderRepository();
-const whController = new PaymentWebhookController(new UpdateOrderPaymentStatusUseCase(orderRepository));
+const paymentRepository = new DynamoPaymentRepository();
+const snsPublisher = new SnsPublisher(topicArn);
+const whController = new PaymentWebhookController(new HandlePaymentCallbackUseCase(paymentRepository, snsPublisher));
 
 router.post(
   '/payment/:id',
