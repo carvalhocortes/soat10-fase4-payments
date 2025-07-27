@@ -7,7 +7,7 @@ import { PaymentWebhookController } from '@interfaces/controllers/webhook.contro
 import { HandlePaymentCallbackUseCase } from '@application/use-cases/payment/HandlePaymentCallback.useCase';
 import { SnsPublisher } from '@infrastructure/external/snsPublisher';
 
-const topicArn = process.env.SNS_TOPIC_ARN || '';
+const topicArn = process.env.SNS_PAYMENT_TOPIC_ARN || '';
 
 const router = express.Router();
 const paymentRepository = new DynamoPaymentRepository();
