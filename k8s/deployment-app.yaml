@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: fiap-fast-food-app-payments
-          image: ${{ env.AWS_ACCOUNT_ID }}.dkr.ecr.${{ env.AWS_REGION }}.amazonaws.com/${{ env.AWS_ECR_NAME }}:latest
+          image: ${IMAGE}
           resources:
             requests:
               cpu: 128m
