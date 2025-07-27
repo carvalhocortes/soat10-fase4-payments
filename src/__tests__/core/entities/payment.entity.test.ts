@@ -35,7 +35,7 @@ describe('Payment Entity Test', () => {
       createdAt: now,
       updatedAt: now,
     });
-    expect(payment.id).toBe('id-1');
+    expect(payment.id).toBe('id-10');
     expect(payment.createdAt).toBe(now);
     expect(payment.updatedAt).toBe(now);
   });
