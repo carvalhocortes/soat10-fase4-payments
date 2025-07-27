@@ -1,32 +1,30 @@
 import * as dynamoose from 'dynamoose';
 import { Item } from 'dynamoose/dist/Item';
 
-export interface CustomerProps extends Item {
-  id: string;
-  cpf: string;
-  name: string;
-  email: string;
+export interface PaymentProps extends Item {
+  id?: string;
+  orderId: string;
+  status: string;
   createdAt?: Date;
   updatedAt?: Date;
 }
 
-const customerSchema = new dynamoose.Schema({
+const paymentSchema = new dynamoose.Schema({
   id: { type: String, hashKey: true, required: true },
-  cpf: {
+  orderId: {
     type: String,
     required: true,
     index: {
-      name: 'cpf-index',
+      name: 'orderId-index',
       type: 'global',
       project: true,
     },
   },
-  name: { type: String, required: true },
-  email: { type: String, required: true },
+  status: { type: String, required: true },
   createdAt: { type: Date, default: Date.now },
   updatedAt: { type: Date, default: Date.now },
 });
 
-export const CustomerModel = dynamoose.model<CustomerProps>('Customer', customerSchema, {
-  tableName: 'customers',
+export const PaymentModel = dynamoose.model<PaymentProps>('Payment', paymentSchema, {
+  tableName: 'payments',
 });
