@@ -1,4 +1,4 @@
-name: CI/CD - Pipeline de Deploy EKS
+name: CI/CD - Pipeline de testes e cobertura
 
 on:
   pull_request:
