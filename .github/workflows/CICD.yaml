@@ -1,4 +1,4 @@
-name: CI/CD
+name: CI/CD - Pipeline de Deploy EKS
 
 on:
   pull_request:
@@ -15,6 +15,7 @@ env:
 jobs:
   tests:
     name: Rodar testes e cobertura
+    if: github.event_name == 'pull_request'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout do código
@@ -44,6 +45,7 @@ jobs:
 
   deploy-production:
     name: Deploy EKS Production
+    if: github.event_name == 'push'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repo
