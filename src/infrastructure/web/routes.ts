@@ -4,13 +4,13 @@ import webhooksRoutes from '@infrastructure/web/routes/webhooks.routes';
 const router = express.Router();
 
 // Health check
-router.get('/health', async (req, res) => {
+router.get('/payment/health', async (req, res) => {
   res.status(200).json({
     status: 'OK',
   });
 });
 
 // Main routes
-router.use('/webhooks', webhooksRoutes);
+router.use('/payment/webhooks', webhooksRoutes);
 
 export default router;
