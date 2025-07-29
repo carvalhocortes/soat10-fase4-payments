@@ -33,6 +33,16 @@ class Server {
 
       const queueUrl = process.env.SQS_PAYMENT_QUEUE_URL || '';
       const topicArn = process.env.SNS_PAYMENT_TOPIC_ARN || '';
+      console.log('');
+      console.log('');
+      console.log('');
+      console.log('');
+      console.log(`Listening to SQS queue: ${queueUrl}`);
+      console.log(`Publishing to SNS topic: ${topicArn}`);
+      console.log('');
+      console.log('');
+      console.log('');
+      console.log('');
       const sqsListener = createSqsListener(queueUrl, topicArn);
 
       const pollMessages = async () => {
