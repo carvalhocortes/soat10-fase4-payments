@@ -54,10 +54,7 @@ jobs:
           export BASE64_SECRET_ACCESS_KEY=$(echo "${{ secrets.AWS_SECRET_ACCESS_KEY }}" | base64)
           export BASE64_SESSION_TOKEN=$(echo "${{ secrets.AWS_SESSION_TOKEN }}" | base64 -w 0)
 
-          echo $BASE64_SESSION_TOKEN
-
           kubectl apply -f k8s/configmap.yaml
-          envsubst < k8s/secret.yaml
           envsubst < k8s/secret.yaml | kubectl apply -f -
           kubectl apply -f k8s/secret.yaml
           envsubst < k8s/deployment-app.yaml | kubectl apply -f -
