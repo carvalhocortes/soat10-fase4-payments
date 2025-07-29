@@ -47,14 +47,15 @@ jobs:
           --region ${{ env.AWS_REGION }}
 
       - name: Kube Apply
+        env:
+          BASE64_ACCESS_KEY_ID: $(echo -n ${{ secrets.AWS_ACCESS_KEY_ID }} | base64)
+          BASE64_SECRET_ACCESS_KEY: $(echo -n ${{ secrets.AWS_SECRET_ACCESS_KEY }} | base64)
+          BASE64_SESSION_TOKEN: $(echo -n ${{ secrets.AWS_SESSION_TOKEN }} | base64)
+          IMAGE: ${{ env.AWS_ACCOUNT_ID }}.dkr.ecr.${{ env.AWS_REGION }}.amazonaws.com/${{ env.AWS_ECR_NAME }}:latest
         run: |
           kubectl apply -f k8s/configmap.yaml
-          export ACCESS_KEY_ID=$(echo ${{ secrets.AWS_ACCESS_KEY_ID }} | base64)
-          export SECRET_ACCESS_KEY=$(echo ${{ secrets.AWS_SECRET_ACCESS_KEY }} | base64)
-          export SESSION_TOKEN=$(echo ${{ secrets.AWS_SESSION_TOKEN }} | base64)
           envsubst < k8s/secret.yaml | kubectl apply -f -
           kubectl apply -f k8s/secret.yaml
-          export IMAGE=${{ env.AWS_ACCOUNT_ID }}.dkr.ecr.${{ env.AWS_REGION }}.amazonaws.com/${{ env.AWS_ECR_NAME }}:latest
           envsubst < k8s/deployment-app.yaml | kubectl apply -f -
           kubectl apply -f k8s/service.yaml
           kubectl apply -f k8s/hpa.yaml
