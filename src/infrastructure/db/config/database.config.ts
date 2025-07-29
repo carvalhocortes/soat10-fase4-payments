@@ -1,5 +1,4 @@
 import * as dynamoose from 'dynamoose';
-import { env } from '../../../config/env';
 
 class Database {
   private constructor() {}
@@ -22,22 +21,6 @@ class Database {
 
   public static async connect(): Promise<void> {
     try {
-      console.log({
-        credentials: {
-          accessKeyId: env.AWS_ACCESS_KEY_ID,
-          secretAccessKey: env.AWS_SECRET_ACCESS_KEY,
-          sessionToken: env.AWS_SESSION_TOKEN,
-        },
-        region: env.AWS_REGION,
-      });
-      console.log({
-        credentials: {
-          accessKeyId: process.env.AWS_ACCESS_KEY_ID!,
-          secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY!,
-          sessionToken: process.env.AWS_SESSION_TOKEN,
-        },
-        region: process.env.AWS_REGION!,
-      });
       const ddb = Database.ddb();
       await ddb.listTables();
       console.log('Connected to DynamoDB');
