@@ -49,9 +49,9 @@ jobs:
       - name: Kube Apply
         run: |
           kubectl apply -f k8s/configmap.yaml
-          export ACCESS_KEY_ID=$(echo -n "${{ secrets.AWS_ACCESS_KEY_ID }}" | base64)
-          export SECRET_ACCESS_KEY=$(echo -n "${{ secrets.AWS_SECRET_ACCESS_KEY }}" | base64)
-          export SESSION_TOKEN=$(echo -n "${{ secrets.AWS_SESSION_TOKEN }}" | base64)
+          export ACCESS_KEY_ID=teste
+          export SECRET_ACCESS_KEY=teste
+          export SESSION_TOKEN=teste
           envsubst < k8s/secret.yaml | kubectl apply -f -
           kubectl apply -f k8s/secret.yaml
           export IMAGE=${{ env.AWS_ACCOUNT_ID }}.dkr.ecr.${{ env.AWS_REGION }}.amazonaws.com/${{ env.AWS_ECR_NAME }}:latest
