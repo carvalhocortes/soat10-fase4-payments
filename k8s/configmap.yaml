@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: fiap-fast-food-config
+  name: fiap-fast-food-payments-config
   namespace: default
   labels:
     app: fiap-fast-food-app-payments
