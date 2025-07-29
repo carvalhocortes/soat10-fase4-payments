@@ -14,7 +14,7 @@ export class ProcessPaymentOnOrderCreatedUseCase {
       orderId,
       status: 'PROCESSING',
     });
-    await this.paymentRepository.update(orderId, payment);
+    await this.paymentRepository.save(payment);
 
     await this.snsPublisher.publish({
       eventType: 'PAYMENT_STARTED',
