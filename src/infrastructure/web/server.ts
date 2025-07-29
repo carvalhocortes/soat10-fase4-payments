@@ -30,8 +30,8 @@ class Server {
   public start(): void {
     this.app.listen(env.PORT, () => {
       console.log(`🚀 Server running on port ${env.PORT}`);
-      const queueUrl = process.env.SQS_PAYMENT_QUEUE_URL || '';
-      const topicArn = process.env.SNS_PAYMENT_TOPIC_ARN || '';
+      const queueUrl = process.env.SQS_PAYMENT_QUEUE_URL || 'https://sqs.us-west-2.amazonaws.com/548226336065/sqs-payments';
+      const topicArn = process.env.SNS_PAYMENT_TOPIC_ARN || 'arn:aws:sns:us-west-2:548226336065:sns-payments';
       const sqsListener = createSqsListener(queueUrl, topicArn);
 
       const pollMessages = async () => {
