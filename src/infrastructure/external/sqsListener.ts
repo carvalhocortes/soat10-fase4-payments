@@ -7,7 +7,9 @@ export class SqsListener {
   private useCase: ProcessPaymentOnOrderCreatedUseCase;
 
   constructor(queueUrl: string, useCase: ProcessPaymentOnOrderCreatedUseCase) {
-    this.sqs = new SQSClient({});
+    this.sqs = new SQSClient({
+      region: process.env.AWS_REGION || 'us-west-2',
+    });
     this.queueUrl = queueUrl;
     this.useCase = useCase;
   }
